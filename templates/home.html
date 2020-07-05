@@ -1,0 +1,43 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <title>主页</title>
+    <script src="/static/js/home.js"></script>
+    <link rel="stylesheet" href="/static/css/home.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <div class="swp">
+            <div class="contain">
+                <div class="wrap" :style="{left: pos*-100+'%'}">
+                    <a :href="i[1]" v-for="i in swp">
+                        <img :src="'/static/img/swp/'+i[0]"/>
+                    </a>
+                </div>
+            </div>
+            <span class="left" @click="do_swp('orient', -1)"></span>
+            <span class="right" @click="do_swp('orient', 1)"></span>
+            <div class="btm">
+                <span :class="{active: pos==i-1}" @mouseover="do_swp('page', i)" v-for="i in swp.length"></span>
+            </div>
+        </div>
+        <div class="hot">
+            <b>热门影视</b>
+            <div>
+                <a :href="'/movie/'+i[0]" class="-movie" v-for="i in hot" :key="i[0]">
+                    <div class="cover">
+                        <img src="/static/img/constant/play.png"/>
+                    </div>
+                    <img :src="'/static/img/cov/'+i[2]"/>
+                    <span>{{ i[1] }}</span>
+                </a>
+            </div>
+        </div>
+        <div class="cate">
+            <b>常用标签</b>
+            <div>
+                <a :href="'/list?t=cate&s='+encodeURI(i)" v-for="i in cate">{{ i }}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

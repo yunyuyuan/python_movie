@@ -1,0 +1,99 @@
+#container {
+  align-items: flex-start; }
+  #container .home {
+    flex-direction: column; }
+    #container .home > .swp {
+      margin-top: 1rem;
+      position: relative;
+      justify-content: center; }
+      #container .home > .swp > .contain {
+        width: 50rem;
+        overflow: hidden;
+        height: 30rem;
+        position: relative; }
+        #container .home > .swp > .contain > .wrap {
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: left .5s ease-out; }
+          #container .home > .swp > .contain > .wrap > a {
+            flex-shrink: 0;
+            width: 50rem;
+            height: 100%; }
+            #container .home > .swp > .contain > .wrap > a > img {
+              background: white;
+              width: 100%;
+              height: 100%;
+              object-fit: cover; }
+      #container .home > .swp > span {
+        color: rgba(81, 255, 199, 0.4);
+        transition: all .15s linear;
+        cursor: pointer;
+        position: absolute; }
+        #container .home > .swp > span:before {
+          display: block;
+          font-family: var(--ico-font);
+          content: var(--ico-swp);
+          font-size: 2.6rem; }
+        #container .home > .swp > span:hover {
+          color: rgba(163, 125, 255, 0.6); }
+        #container .home > .swp > span.left {
+          left: -2rem; }
+          #container .home > .swp > span.left:before {
+            transform: rotate(180deg); }
+        #container .home > .swp > span.right {
+          right: -2rem; }
+      #container .home > .swp > .btm {
+        position: absolute;
+        bottom: 1rem; }
+        #container .home > .swp > .btm > span {
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.5);
+          margin: 0 0.3rem; }
+          #container .home > .swp > .btm > span.active {
+            background: red; }
+    #container .home > .hot, #container .home > .cate {
+      width: 60rem;
+      flex-direction: column; }
+      #container .home > .hot > b, #container .home > .cate > b {
+        width: 100%;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        padding: 0.5rem 0;
+        background: #d2a9ff;
+        border-radius: 0.4rem;
+        margin: 1rem 0; }
+        #container .home > .hot > b:before, #container .home > .cate > b:before {
+          font-family: var(--ico-font);
+          font-size: 1.8rem;
+          margin: 0 0.6rem; }
+      #container .home > .hot > div, #container .home > .cate > div {
+        width: 100%; }
+    #container .home > .hot > b:before {
+      content: var(--ico-hot); }
+    #container .home > .hot > div {
+      justify-content: center; }
+    #container .home > .cate {
+      margin-bottom: 4rem; }
+      #container .home > .cate > b:before {
+        content: var(--ico-tag); }
+      #container .home > .cate > div {
+        flex-wrap: wrap;
+        justify-content: flex-start; }
+        #container .home > .cate > div > a {
+          background: #aebaff;
+          text-decoration: none;
+          padding: 0.6rem 1.2rem;
+          font-size: 1.03rem;
+          transition: all .15s linear;
+          margin: 0.35rem 0.8rem;
+          border-radius: 0.2rem;
+          color: black; }
+          #container .home > .cate > div > a:hover {
+            color: red;
+            background: #a2aeee; }
+
+/*# sourceMappingURL=home.css.map */

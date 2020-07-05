@@ -1,0 +1,19 @@
+$head-height: 3.6rem;
+
+@mixin phone_handle {
+  @media screen and (max-width: 768px){
+    @content
+  }
+}
+@mixin pc_handle{
+  @media screen and (min-width: 768px){
+    @content
+  }
+}
+@mixin text-overflow($line: 1){
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+}

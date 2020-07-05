@@ -1,0 +1,35 @@
+.turn-page {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0; }
+  .turn-page > a.txt {
+    border-radius: 0.3rem;
+    padding: 0.2rem 0.4rem;
+    background: #4f6eff;
+    color: white;
+    font-size: 0.96rem;
+    margin: 0 0.5rem;
+    transition: all .2s; }
+    .turn-page > a.txt:hover {
+      background: #4561e0; }
+    .turn-page > a.txt:not([p]) {
+      cursor: not-allowed;
+      background: gray; }
+  .turn-page > a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    margin: 0 0.3rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background: white;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid #c3c3c3;
+    border-radius: 0.2rem; }
+    .turn-page > a:not(.txt):hover {
+      text-decoration: underline;
+      color: #ff3633; }
+    .turn-page > a.active {
+      color: red; }
+
+/*# sourceMappingURL=vue_turnpage.css.map */

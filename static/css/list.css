@@ -1,0 +1,22 @@
+#container {
+  align-items: flex-start; }
+  #container > .list {
+    width: 100%;
+    flex-direction: column; }
+    #container > .list > .head {
+      padding: 1rem 0;
+      width: 80%; }
+      #container > .list > .head > span {
+        font-size: 0.98rem; }
+        #container > .list > .head > span:last-of-type {
+          margin: 0 1rem 0 auto; }
+        #container > .list > .head > span > b {
+          margin: 0 0.5rem;
+          color: red;
+          font-size: 1.2em; }
+    #container > .list > .body {
+      flex-direction: column; }
+      #container > .list > .body > .main {
+        margin: 1rem 0; }
+
+/*# sourceMappingURL=list.css.map */

@@ -1,0 +1,30 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <title>登录</title>
+    <script src="/static/js/lib/md5.js"></script>
+    <script src="/static/js/login.js"></script>
+    <link rel="stylesheet" href="/static/css/login.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="login">
+        <b>登录</b>
+        <div class="main">
+            <div class="who">
+                <span @click="change_at" :class="{active: at==i}" v-for="i in who_list">{{ i }}</span>
+            </div>
+            <div class="udl-ipt">
+                <input @keyup.enter="to_pwd" v-model="act" maxlength="32" placeholder="账号"/>
+                <span></span>
+            </div>
+            <div class="udl-ipt">
+                <input @keyup.enter="do_submit" v-model="pwd" type="password" maxlength="32" placeholder="密码"/>
+                <span></span>
+            </div>
+            <div class="btm">
+                <button @click="do_submit">登录</button>
+                <a href="<% url_for('public.reg') %>">前往注册</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

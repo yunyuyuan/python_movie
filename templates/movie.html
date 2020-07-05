@@ -1,0 +1,87 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <title>标题</title>
+    <script src="/static/js/plugin/vue_star.js"></script>
+    <script src="/static/js/plugin/vue_turnpage.js"></script>
+    <script src="/static/js/movie.js"></script>
+    <link rel="stylesheet" href="/static/css/plugin/vue_star.css"/>
+    <link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+    <link rel="stylesheet" href="/static/css/movie.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="movie">
+        <div class="play">
+            <div class="mv">
+                {% if logined %}
+                <video :src="'/static/videos/'+mv_id+'/'+now_ep" controls></video>
+                {% else %}
+                <div class="login">
+                    <span class="to_login">请<a :href="'<% url_for('public.login') %>?url='+location.href">登录</a>后观看</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="detail">
+                <img :src="'/static/img/cov/'+info['cov']"/>
+                <b class="title">{{ info['title'] }}</b>
+                <div class="detail">
+                    <span v-for="(d,i) in info_lis" :key="i">
+                        <span><span>{{ d }}</span></span>
+                        <a>{{ info['info'][i] }}</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="ep">
+            <span>选集</span>
+            <div>
+                <button v-for="(ep,idx) in info['src']" :title="'第'+(idx+1)+'集'" :class="{active: ep==now_ep}" :key="idx" @click="swc_ep(idx)">{{ idx+1 }}</button>
+            </div>
+        </div>
+        <div class="ev">
+            <div class="dcb">
+                <b>影片详情</b>
+                <div class="star-div">
+                    <star ref="mv_star" :star="info['star']" :modify="'f'" :f_size="'1.5rem'"></star>
+                    <b>{{ info['star'] }}</b>
+                    <span>(<b>{{ ev_data[0] }}</b>人评价)</span>
+                    <div class="cate">
+                        <a :href="'<% url_for('public.list_') %>?t=cate&s='+encodeURI(i)" v-for="i in info['cate']">{{ i }}</a>
+                    </div>
+                </div>
+                <span>{{ info['info'][4] }}</span>
+            </div>
+            <div class="body">
+                <div class="write">
+                    {% if is_user %}
+                    <textarea v-model="ev_txt" maxlength="1024" placeholder="写一条友善的评价吧!"></textarea>
+                    <div>
+                        <div>
+                            <star @give_star="give_star" :star="wrt_star" :modify="'t'" :f_size="'1.3rem'" :event="'give_star'"></star>
+                            <b>{{ wrt_star }}</b>
+                        </div>
+                        <button @click="submit_ev">提交</button>
+                    </div>
+                    {% else %}
+                    <span class="to_login">请前往<a :href="'<% url_for('public.login') %>?url='+location.href">登录</a>后再发表评论</span>
+                    {% endif %}
+                </div>
+                <div class="show">
+                    <b>网友评论</b>
+                    <div class="main">
+                        <div v-for="e in ev_data[1]">
+                            <div>
+                                <div class="avatar"><span>{{ e[0].substring(0,1) }}</span></div>
+                                <span>{{ e[0] }}</span>
+                                <star :star="e[1]" :modify="'f'" :f_size="'1rem'"></star>
+                                <i>{{ e[3] }}</i>
+                            </div>
+                            <span>{{ e[2] }}</span>
+                        </div>
+                    </div>
+                    <turn-page @change_p="change_p" :now="ev_p" :count="p_count" :show_count="6" :event="'change_p'"></turn-page>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <title>用户注册</title>
+    <script src="/static/js/lib/md5.js"></script>
+    <link rel="stylesheet" href="/static/css/login.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="login">
+        <b>用户注册</b>
+        <div class="main">
+            <div class="udl-ipt">
+                <input @keyup.enter="function(e){e.target.parentElementSibling.nextElementSibling.querySelector('input').focus()}" v-model="nm" maxlength="16" placeholder="昵称"/>
+                <span></span>
+            </div>
+            <div class="udl-ipt">
+                <input @keyup.enter="function(e){e.target.parentElementSibling.nextElementSibling.querySelector('input').focus()}" v-model="act" maxlength="32" placeholder="账号"/>
+                <span></span>
+            </div>
+            <div class="udl-ipt">
+                <input @keyup.enter="do_submit" v-model="pwd" type="password" maxlength="32" placeholder="密码"/>
+                <span></span>
+            </div>
+            <div class="btm">
+                <button @click="do_submit">注册</button>
+                <a href="<% url_for('public.login') %>">前往登录</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let vue_ = new Vue({
+                el: '#container',
+                data: {
+                    nm: '',
+                    act: '',
+                    pwd: '',
+                },
+                methods: {
+                    do_submit: function () {
+                        if (vue_.nm==='' ||vue_.act==='' || vue_.pwd===''){
+                            head_vue.remind_err('昵称,账号或密码不能为空');
+                            return
+                        }
+                        ajax_(function (r) {
+                            if (r['state']==='error' && r['msg'].search('Duplicate')!==-1){
+                                r['msg'] = '账号已被注册';
+                            }
+                            head_vue.remind(r);
+                            if (r['state']==='success'){
+                                let map = para_to_map();
+                                setTimeout(function () {
+                                    location.href = (typeof map['url'] != 'undefined'?map['url']:'/login')
+                                }, 500)
+                            }
+                        }, '/ajax/rg', {'nm': vue_.nm, 'act': vue_.act, 'pwd': hex_md5(vue_.pwd)})
+                    }
+                }
+            })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,115 @@
+@import "../plugin/public";
+#manage{
+  >.conf{
+    width: 100%;
+    flex-direction: column;
+    >.head{
+      justify-content: center;
+      width: 90%;
+      border-bottom: 1px solid gray;
+      margin: 0.6rem 0;
+      padding: 1rem 0;
+      >b{
+        font-size: 1.2rem;
+      }
+    }
+    >.body{
+      width: 100%;
+      justify-content: center;
+      flex-direction: column;
+      >.act,>.pwd{
+        margin: 1rem 0;
+        >b{
+          width: 5rem;
+          font-size: 1rem;
+        }
+        >input{
+          font-size: 1.03rem;
+          padding: 0.4rem;
+          border: 1px solid gray;
+          border-radius: 0.15rem;
+        }
+      }
+      >.swp{
+        width: 100%;
+        flex-direction: column;
+        >b{
+          font-size: 1.05rem;
+          padding: 0.4rem 1.2rem;
+          border-radius: 0.3rem;
+          background: #b2beff;
+        }
+        >ul{
+          width: 100%;
+          list-style: none;
+          >li{
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-top: 1px solid gray;
+            justify-content: space-around;
+            >div:first-of-type{
+              cursor: pointer;
+              width: 20rem;
+              height: 10rem;
+              position: relative;
+              &:hover{
+                >b{
+                  opacity: 1;
+                }
+              }
+              >b,>img{
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position: absolute;
+              }
+              >b{
+                font-size: 1.2rem;
+                color: white;
+                opacity: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+              }
+              >img{
+                object-fit: contain;
+                background: white;
+                border: 1px solid gray;
+                z-index: 1;
+              }
+              >input{
+                display: none;
+              }
+            }
+            >div:last-of-type{
+              >b{
+                margin-right: 0.4rem;
+                font-size: 0.98rem;
+              }
+              >input{
+                padding: 0.4rem 0.2rem;
+                border: 1px solid gray;
+                border-radius: 0.2rem;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+      >button{
+        margin: 1rem 0;
+        background: #ff9935;
+        font-size: 1.2rem;
+        &:hover{
+          background: #e3882f;
+        }
+        color: white;
+        padding: 0.4rem 1.2rem;
+      }
+    }
+  }
+}

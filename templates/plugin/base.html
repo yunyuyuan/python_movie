@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="电影网站"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.jpg"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.jpg"/>
+    <link rel="stylesheet" href="/static/css/plugin/all_need.css"/>
+    <link rel="stylesheet" href="/static/css/plugin/class.css"/>
+    <link rel="stylesheet" href="/static/css/plugin/vue_remind.css"/>
+    <script src="/static/js/lib/jquery.min.js"></script>
+    <script src="/static/js/lib/vue.min.js"></script>
+    <script src="/static/js/plugin/vue_remind.js"></script>
+    <script src="/static/js/plugin/share.js"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <div id="-head">
+        <a class="title" href="<% url_for('public.home') %>">电影网站</a>
+        <div class="search">
+            <input @keyup.enter="go_search" v-model.lazy="s" placeholder="搜索(留空搜索全部)"/>
+            <span @click="go_search"></span>
+        </div>
+        <a class="self" href="<% url_for('public.self') %>"></a>
+        <div class="hide-remind"></div>
+        <remind ref="head_remind" :shown="0.4" :duration="5" :start_css="{'top': '0'}" :end_css="{'top': '4rem'}"></remind>
+    </div>
+    <div id="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

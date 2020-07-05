@@ -1,0 +1,99 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-配置</title>
+<script src="/static/js/lib/md5.js"></script>
+<link rel="stylesheet" href="/static/css/manager/manager.css"/>
+<link rel="stylesheet" href="/static/css/manager/conf.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="conf">
+    <div class="head">
+        <b>配置管理</b>
+    </div>
+    <div class="body">
+        <div class="act">
+            <b>超管账号</b>
+            <input v-model="conf['act']"/>
+        </div>
+        <div class="pwd">
+            <b>超管密码</b>
+            <input v-model="conf['pwd']" placeholder="修改"/>
+        </div>
+        <div class="swp">
+            <b>滑动内容</b>
+            <ul>
+                <li v-for="(item,idx) in conf['swp']">
+                    <div onclick="this.querySelector('input').click()">
+                        <img :src="'/static/img/swp/'+item[0]"/>
+                        <b>修改</b>
+                        <input @change="function(e){get_img(e,idx)}" type="file" accept="image/*"/>
+                    </div>
+                    <div>
+                        <b>链接:</b>
+                        <input v-model="item[1]"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <button @click="submit">提交</button>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                conf: {swp: [], act: '', pwd: ''},
+                changed: new Set(),
+            },
+            computed: {
+            },
+            methods: {
+                get_img: function (e, idx) {
+                    let ipt = e.target;
+                    let img = $(ipt).siblings('img');
+                    let file = ipt.files[0];
+                    if (typeof file!='undefined' && file.size<1024*1024*5){
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (r) {
+                            img.attr('src', r.target.result);
+                            vue_.changed.add(idx);
+                        }
+                    }else{
+                        head_vue.remind_err('图片需小于5M')
+                    }
+                },
+                submit: function () {
+                    let form = new FormData();
+                    form.append('act', vue_.conf['act']);
+                    if (vue_.conf.pwd){
+                        form.append('pwd', hex_md5(vue_.conf.pwd));
+                    }
+                    let files = $(vue_.$el).find('input[type=file]');
+                    let swp = JSON.parse(JSON.stringify(vue_.conf.swp));
+                    let del_img = [];
+                    for (let idx of vue_.changed){
+                        let f = files[idx].files[0];
+                        let f_name = (idx+1)+'.'+f.type.replace('image/', '');
+                        form.append(f_name, f);
+                        swp[idx][0] = f_name;
+                        del_img.push(vue_.conf.swp[idx][0]);
+                    }
+                    form.append('swp', JSON.stringify(swp));
+                    form.append('del_img', JSON.stringify(del_img));
+                    ajax_(function (r) {
+                        head_vue.remind(r);
+                    }, '/super/submit_conf', form, {processData: false, contentType: false})
+                }
+            }
+        });
+        ajax_(function (r) {
+            if (r['state']==='success'){
+                r['data']['swp'] = JSON.parse(r['data']['swp']);
+                vue_.conf = r['data'];
+            }
+        }, '/super/get_conf', {})
+    })
+</script>
+{% endblock %}

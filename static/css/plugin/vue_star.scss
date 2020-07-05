@@ -1,0 +1,27 @@
+.star{
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  >span{
+    position: relative;
+    display: flex;
+    &:before,&:after{
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-family: var(--ico-font);
+      content: var(--ico-star)var(--ico-star)var(--ico-star)var(--ico-star)var(--ico-star);
+    }
+    &:before{
+      position: relative;
+      color: #8b8b8b;
+      overflow: visible;
+    }
+    &:after{
+      width: 100%;
+      color: #ffb652;
+      overflow: hidden;
+      transition: all .1s linear;
+    }
+  }
+}

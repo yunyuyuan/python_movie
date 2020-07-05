@@ -1,0 +1,275 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-影片</title>
+<script src="/static/js/plugin/vue_turnpage.js"></script>
+<script src="/static/js/lib/md5.js"></script>
+<link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+<link rel="stylesheet" href="/static/css/manager/movie.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="movie">
+    <div class="head">
+        <span>共<b>{{ m_count }}</b>部影片,<b>{{ p_count }}</b>页</span>
+        <button @click="add(1)">添加</button>
+    </div>
+    <transition name="fade">
+        <div v-show="in_add" class="fixed-div add">
+            <div class="wrap" @click.self="add(0)">
+                <div class="main">
+                    <b>{{ is_alter?'修改':'添加' }}影片</b>
+                    <div onclick="this.querySelector('input').click()" class="cover">
+                        <span v-show="!show_img">上传海报</span>
+                        <input :disabled="uploading" @change="up_cov" type="file" accept="image/*">
+                        <img :src="cov_src" v-show="show_img" />
+                    </div>
+                    <div class="movie">
+                        <div onclick="this.querySelector('input').click()" class="cos">
+                            <span>{{ mv_len==0?'上传影片':(mv_len+'个文件') }}</span>
+                            <input :disabled="uploading" @change="up_mv" multiple="multiple" type="file" accept="video/mp4">
+                        </div>
+                        <button :disabled="uploading">编辑</button>
+                    </div>
+                    <div class="title">
+                        <b>标题</b>
+                        <div class="udl-ipt">
+                            <input v-model="title" maxlength="32" placeholder=""/>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="cate row">
+                        <b>标签</b>
+                        <span v-for="(i,idx) in cate" :key="idx" @click="del_cate(idx)">{{ i }}</span>
+                        <a @click="add_cate"></a>
+                    </div>
+                    <div class="detail row">
+                        <b>信息</b>
+                        <div v-for="(s,i) in detail_lis" class="info-detail">
+                            <span>{{ s }}</span>
+                            <div class="udl-ipt">
+                                <input v-model="info[i]" maxlength="32"/>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txt row">
+                        <b>描述</b>
+                        <textarea v-model="info[4]" maxlength="2048" placeholder="影片简介"></textarea>
+                    </div>
+                    <button @click="do_add">{{ is_alter?'修改':'添加' }}</button>
+                    <div class="upload">
+                        <div :style="{left: '-'+(100-pct)+'%'}"></div>
+                        <span v-show="uploading">上传中-{{ pct }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>海报</td>
+                    <td>标题</td>
+                    <td>集数</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,idx) in movie_list" :key="item['id']">
+                    <td>{{ item['id'] }}</td>
+                    <td><a target="_blank" :href="'/movie/'+item['id']"><img :src="'/static/img/cov/'+item['cov']"/></a></td>
+                    <td>{{ item['title'] }}</td>
+                    <td>{{ item['src'] }}</td>
+                    <td>
+                        <button @click="to_alter(idx)" class="alter">修改</button>
+                        <button @click="del(idx)" class="del">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <turn-page @change_p="change_p" :now="now_p" :count="p_count" :show_count="8" :event="'change_p'"></turn-page>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let page_count = 10;
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                old_list: [],
+                movie_list: [],
+                now_p: 1,
+                m_count: 0,
+                in_add: false,
+                show_img: false,
+                title: '',
+                cov: '',
+                cov_src: '',
+                mv: [],
+                mv_len: 0,
+                cate: [],
+                info: ['', '', '', '', ''],
+                is_alter: false,
+                alter_id: 0,
+                detail_lis: mv_info_lis,
+                pct: 0,
+                uploading: false,
+            },
+            computed: {
+                p_count: function () {
+                    return Math.ceil(this.m_count/page_count)
+                }
+            },
+            methods: {
+                change_p: function (p){
+                    vue_.now_p = p;
+                    get_list()
+                },
+                del_cate: function(idx){
+                    vue_.cate.splice(idx, 1);
+                },
+                add_cate: function (id, f) {
+                    let s = prompt('输入标签');
+                    if (s){
+                        vue_.cate.push(s)
+                    }
+                },
+                del: function (idx) {
+                    if (confirm('确认删除该影片?')){
+                        ajax_(function (r) {
+                            if (r['state']==='success'){
+                                head_vue.remind(r);
+                                get_list()
+                            }
+                        }, '/manager/del_mv', {'id': vue_.movie_list[idx]['id'], 'cov': vue_.movie_list[idx]['cov']})
+                    }
+                },
+                add: function (t, idx) {
+                    vue_.in_add = t===1;
+                    if (t===1){
+                        if (typeof idx!='undefined'){
+                            // 填入信息
+                            let dir = vue_.movie_list[idx];
+                            vue_.is_alter = true;
+                            vue_.title = dir['title'];
+                            vue_.cate = dir['cate'];
+                            vue_.info = dir['info'];
+                            vue_.mv_len = dir['src'];
+                            vue_.cov = '';
+                            vue_.cov_src = '/static/img/cov/'+dir['cov'];
+                            vue_.show_img = true;
+                        }
+                    }else if (vue_.is_alter){
+                        // 还原数据
+                        vue_.movie_list = JSON.parse(JSON.stringify(vue_.old_list));
+                        // 清空信息
+                        vue_.is_alter = false;
+                        vue_.title = '';
+                        vue_.cate = [];
+                        vue_.info = ['','','','',''];
+                        vue_.mv = [];
+                        vue_.mv_len = 0;
+                        vue_.cov = '';
+                        vue_.cov_src = '';
+                        vue_.show_img = false;
+                    }
+                },
+                to_alter: function(idx){
+                    vue_.alter_id = vue_.movie_list[idx]['id'];
+                    vue_.add(1, idx);
+                },
+                up_cov: function(e){
+                    let ipt = e.target;
+                    let file = ipt.files[0];
+                    if (typeof file!='undefined' && file.size < 1024*1024*5){
+                        let reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function (r) {
+                            vue_.cov_src = r.target.result;
+                            vue_.show_img = true;
+                            vue_.cov = file;
+                        }
+                    }else{
+                        head_vue.remind_err('图片需要小于5M')
+                    }
+                },
+                up_mv: function(e){
+                    let ipt = $(e.target);
+                    let files = ipt[0].files;
+                    if (files.length===0) return;
+                    for (let file of files){
+                        if (file.size > 1024*1024*1024){
+                            head_vue.remind_err('影片需要小于1G');
+                            return
+                        }
+                    }
+                    vue_.mv = files;
+                    vue_.mv_len = files.length;
+                },
+                do_add: function (e) {
+                    if (vue_.title===''){
+                        head_vue.remind_err('标题不能为空')
+                    }else if (!vue_.is_alter && vue_.cov===''){
+                        head_vue.remind_err('海报不能为空')
+                    }else if (!vue_.is_alter && vue_.mv===''){
+                        head_vue.remind_err('影片不能为空')
+                    }else{
+                        let btn = $(e.target);
+                        let form = new FormData();
+                        form.append('is_alter', vue_.is_alter);
+                        form.append('title', vue_.title);
+                        form.append('cov', vue_.cov);
+                        form.append('cate', JSON.stringify(vue_.cate));
+                        form.append('info', JSON.stringify(vue_.info));
+                        if (vue_.is_alter){
+                            form.append('id', vue_.alter_id);
+                            form.append('alter_cov', vue_.cov===''?'0':'1');
+                            form.append('alter_mv', vue_.mv.length>0?'1':'0');
+                        }
+                        for (let idx=0;idx<vue_.mv.length;idx++){
+                            let file = vue_.mv[idx];
+                            if (file instanceof File){
+                                form.append('mv'+(idx+1), file);
+                            }
+                        }
+                        btn.attr('disabled', '');
+                        vue_.uploading = true;
+                        vue_.pct = 0;
+                        ajax_(function (r) {
+                            head_vue.remind(r);
+                            get_list();
+                        }, '/manager/add_alter', form, {processData: false, contentType: false,
+                            xhr: function () {
+                                let xhr = new XMLHttpRequest();
+                                xhr.upload.addEventListener('progress', function (e) {
+                                    vue_.pct = (e.loaded*100/e.total).toString().replace(/(\d*\.\d)\d*/, '$1')
+                                });
+                                return xhr;
+                            }, complete: function(){
+                                btn.removeAttr('disabled');
+                                vue_.uploading = false;
+                                vue_.pct = 0;
+                            }})
+                    }
+                }
+            }
+        });
+        get_list();
+        function get_list() {
+            ajax_(function (r) {
+                if (r['state']==='success'){
+                    [vue_.m_count, vue_.movie_list] = r['data'];
+                    vue_.old_list = JSON.parse(JSON.stringify(vue_.movie_list));
+                    for (let i=0;i<vue_.movie_list.length;i++){
+                        for (let s of ['info', 'cate']){
+                            vue_.movie_list[i][s] = JSON.parse(vue_.movie_list[i][s]);
+                            vue_.old_list[i][s] = JSON.parse(vue_.old_list[i][s]);
+                        }
+                    }
+                }
+            }, '/manager/get_mv_list', {'p': vue_.now_p-1, 'count': page_count})
+        }
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-管理员</title>
+<script src="/static/js/plugin/vue_turnpage.js"></script>
+<script src="/static/js/lib/md5.js"></script>
+<link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+<link rel="stylesheet" href="/static/css/manager/manager.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="manager">
+    <div class="head">
+        <span>共<b>{{ m_count }}</b>位管理员,<b>{{ p_count }}</b>页</span>
+        <button @click="add(1)">添加</button>
+    </div>
+    <transition name="fade">
+        <div v-show="in_add" class="fixed-div add">
+            <div class="wrap" @click.self="add(0)">
+                <div class="main">
+                    <b>添加管理员</b>
+                    <div class="udl-ipt">
+                        <input v-model="act" maxlength="16" placeholder="账号"/>
+                        <span></span>
+                    </div>
+                    <div class="udl-ipt">
+                        <input v-model="pwd" maxlength="32" placeholder="密码"/>
+                        <span></span>
+                    </div>
+                    <button @click="do_add">添加</button>
+                </div>
+            </div>
+        </div>
+    </transition>
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>名称</td>
+                    <td>账号</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in manager_list" :key="item['id']">
+                    <td>{{ item['id'] }}</td>
+                    <td>{{ item['nm'] }}</td>
+                    <td>{{ item['act'] }}</td>
+                    <td :class="item['frz']?'frz':'free'">{{ item['frz']?'已冻结':'正常' }}</td>
+                    <td>
+                        <button @click="do_frz(item['id'],item['frz'])" :class="item['frz']?'free':'frz'">{{ item['frz']?'解冻':'冻结' }}</button>
+                        <button @click="del(item['id'])" class="del">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <turn-page @change_p="change_p" :now="now_p" :count="p_count" :show_count="8" :event="'change_p'"></turn-page>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let page_count = 10;
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                manager_list: [],
+                now_p: 1,
+                m_count: 0,
+                in_add: false,
+                act: '',
+                pwd: ''
+            },
+            computed: {
+                p_count: function () {
+                    return Math.ceil(this.m_count/page_count)
+                }
+            },
+            methods: {
+                change_p: function (p){
+                    vue_.now_p = p;
+                    get_list()
+                },
+                do_frz: function (id, f) {
+                    ajax_(function (r) {
+                        if (r['state']==='success'){
+                            r['msg'] = (f?'解冻':'冻结')+'成功';
+                            head_vue.remind(r);
+                            get_list()
+                        }
+                    }, '/super/frz', {'id': id, 'f': !f})
+                },
+                del: function (id) {
+                    if (confirm('确认删除该管理员?')){
+                        ajax_(function (r) {
+                            if (r['state']==='success'){
+                                head_vue.remind(r);
+                                get_list()
+                            }
+                        }, '/super/del', {'id': id})
+                    }
+                },
+                add: function (t) {
+                    vue_.in_add = t===1
+                },
+                do_add: function () {
+                    if (vue_.act===''||vue_.pwd===''){
+                        head_vue.remind_err('账号或密码不能为空')
+                    }else{
+                        ajax_(function (r) {
+                            if (r['state']==='error' && r['msg'].search('Duplicate')!==-1){
+                                r['msg'] = '账号重复'
+                            }else if (r['state']==='success'){
+                                vue_.now_p = 1;
+                                get_list()
+                            }
+                            head_vue.remind(r);
+                        }, '/super/add', {'act': vue_.act, 'pwd': hex_md5(vue_.pwd)})
+                    }
+                }
+            }
+        });
+        get_list();
+        function get_list() {
+            ajax_(function (r) {
+                if (r['state']==='success'){
+                    [vue_.m_count, vue_.manager_list] = r['data']
+                }else{
+                    head_vue.remind(r)
+                }
+            }, '/super/get_list', {'p': vue_.now_p-1, 'count': page_count})
+        }
+    })
+</script>
+{% endblock %}

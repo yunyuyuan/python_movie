@@ -1,0 +1,24 @@
+.star {
+  display: flex;
+  align-items: center;
+  width: fit-content; }
+  .star > span {
+    position: relative;
+    display: flex; }
+    .star > span:before, .star > span:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-family: var(--ico-font);
+      content: var(--ico-star) var(--ico-star) var(--ico-star) var(--ico-star) var(--ico-star); }
+    .star > span:before {
+      position: relative;
+      color: #8b8b8b;
+      overflow: visible; }
+    .star > span:after {
+      width: 100%;
+      color: #ffb652;
+      overflow: hidden;
+      transition: all .1s linear; }
+
+/*# sourceMappingURL=vue_star.css.map */

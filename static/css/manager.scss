@@ -1,0 +1,73 @@
+@import "plugin/public";
+
+$menu-width: 10rem;
+#manage-menu{
+  position: fixed;
+  width: $menu-width;
+  height: calc(100% - #{$head-height});
+  left: 0;
+  top: $head-height;
+  background: #2b2b2b;
+  flex-direction: column;
+  >ul{
+    width: 100%;
+    margin: 1rem 0 auto 0;
+    list-style: none;
+    >li{
+      display: flex;
+      >a{
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+        font-size: 1.1rem;
+        color: white;
+        padding: 1rem 0;
+        &:hover{
+          background: #3e3e3e;
+        }
+        &.active{
+          background: #111111;
+        }
+      }
+    }
+  }
+  >.logout{
+    margin: auto 0 1rem 0;
+    cursor: pointer;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    &:hover{
+      >span{
+        color: #e32c2d;
+      }
+    }
+    >a{
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 25%;
+      left: 25%;
+      background: white;
+      z-index: 1;
+    }
+    >span{
+      position: absolute;
+      z-index: 2;
+      color: #ff3133;
+      &:before{
+        font-family: var(--ico-font);
+        content: var(--ico-logout);
+        font-size: 2rem;
+        line-height: 2rem;
+      }
+    }
+  }
+}
+#manage{
+  position: absolute;
+  left: $menu-width;
+  width: calc(100% - #{$menu-width});
+  flex-direction: column;
+  top: 1rem;
+}

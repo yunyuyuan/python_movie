@@ -1,0 +1,254 @@
+@charset "UTF-8";
+#manage{
+  >.movie{
+    flex-direction: column;
+    width: 100%;
+    >.head{
+      padding: 0.8rem 0;
+      width: 100%;
+      >span{
+        margin-left: 2rem;
+        font-size: 1.05rem;
+        >b{
+          margin: 0 0.3rem;
+          color: #ff333b;
+          font-size: 1.1em;
+        }
+      }
+      >button{
+        margin: 0 2rem 0 auto;
+        background: #4f6eff;
+        &:hover{
+        background: #4661e2;
+        }
+        color: white;
+        font-size: 1.04rem;
+        padding: 0.3rem 0.8rem;
+        box-shadow: 0 0 0.5rem #9e9e9e;
+      }
+    }
+    >.add{
+      .main{
+        flex-direction: column;
+        width: 60rem;
+        >b{
+          font-size: 1.1rem;
+          padding: 1rem;
+        }
+        >.cover,>.movie{
+          justify-content: center;
+          border-radius: 0.4rem;
+          cursor: pointer;
+        }
+        >.cover{
+          height: 6rem;
+          width: 10rem;
+          border: 1px dashed black;
+          margin-bottom: 0.5rem;
+          >input{
+            display: none;
+          }
+          >img{
+            border-radius: inherit;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border: 1px solid gray;
+          }
+        }
+        >.movie{
+          width: 60%;
+          >.cos{
+            width: 8rem;
+            height: 2rem;
+            border: 1px solid #494949;
+            justify-content: center;
+            >input{
+              display: none;
+            }
+          }
+          >button{
+            border: 1px solid #ff6f00;
+            background: white;
+            margin-left: 0.6rem;
+            &:hover{
+              color: red;
+            }
+          }
+        }
+        >.title{
+          width: 90%;
+          justify-content: center;
+          border-bottom: 1px solid gray;
+          >b{
+            font-size: 1.02rem;
+            margin: 0 0.3rem;
+          }
+          >.udl-ipt{
+            width: 25rem;
+            margin: 0.3rem 0;
+            >input{
+              padding: 0.6rem 0.4rem;
+              font-size: 1.06rem;
+            }
+          }
+        }
+        >.row{
+          width: 95%;
+          >b{
+            width: 3.6rem;
+            font-size: 0.98rem;
+            text-align: center;
+          }
+        }
+        >.cate{
+          margin: 0.8rem 0;
+          width: 95%;
+          >span{
+            cursor: pointer;
+            margin: 0.2rem 0.4rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.95rem;
+            background: #c6d2ff;
+            position: relative;
+            overflow: hidden;
+            &:after{
+              content: '删除';
+              position: absolute;
+              left: 0;
+              font-size: 0.95rem;
+              padding: 0.3rem 0.6rem;
+              top: 100%;
+              background: red;
+              color: white;
+              width: calc(100% - 1.2rem);
+              text-align: center;
+              transition: all .15s linear;
+            }
+            &:hover{
+              &:after{
+                top: 0;
+              }
+            }
+          }
+          >a{
+            cursor: pointer;
+            color: #415bff;
+            transition: all .15s linear;
+            &:before{
+              font-family: var(--ico-font);
+              content: var(--ico-add);
+              font-size: 1.8rem;
+              line-height: 1.8rem;
+            }
+            &:hover{
+              color: #374dd9;
+            }
+          }
+        }
+        >.detail{
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin-bottom: 0.8rem;
+          >.info-detail{
+            width: 12rem;
+            >span {
+              font-size: 0.9rem;
+              width: 2rem;
+              flex-shrink: 0;
+            }
+            >.udl-ipt {
+              margin: 0.3rem 0;
+              >input{
+                padding: 0.4rem 0;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+        >.txt{
+          >textarea{
+            width: 80%;
+            height: 5rem;
+            font-size: 0.98rem;
+            padding: 0.4rem 0.2rem;
+          }
+        }
+        >button{
+          margin: 1rem 0 1rem 0;
+          background: #ff7201;
+          font-size: 1.1rem;
+          &:hover{
+          background: #e36501;
+          }
+          color: white;
+          box-shadow: 0 0 0.8rem #9a9a9a;
+        }
+        >.upload{
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+          height: 1.8rem;
+          justify-content: center;
+          margin-bottom: 0.5rem;
+          >div{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: -100%;
+            top: 0;
+            background: linear-gradient(to right, #8c3bff, #6645ff);
+            border-radius: 0.5rem;
+            z-index: 1;
+          }
+          >span{
+            z-index: 2;
+            font-size: 0.95rem;
+          }
+        }
+      }
+    }
+    >.list{
+      width: calc(100% - 2rem);
+      padding: 1rem;
+      justify-content: center;
+      >table{
+        max-width: 60rem;
+        width: 100%;
+        >tbody{
+          td{
+            >a{
+              >img{
+                width: 8rem;
+                height: 6rem;
+                object-fit: contain;
+                border: 1px solid gray;
+                background: white;
+                transition: all .1s linear;
+                &:hover{
+                  transform: scale(1.5);
+                }
+              }
+            }
+            >button{
+              margin: 0 0.2rem;
+              color: white;
+              &.alter{
+                background: #4840ff;
+                &:hover{
+                  background: #4039e3;
+                }
+              }
+              &.del{
+                background: #d6484c;
+                &:hover{
+                  background: #be4043;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

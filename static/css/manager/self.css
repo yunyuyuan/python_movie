@@ -1,0 +1,31 @@
+#manage > .self {
+  flex-direction: column; }
+  #manage > .self > b {
+    font-size: 1.6rem;
+    padding: 1rem 0; }
+  #manage > .self > .row {
+    margin: 1rem 0;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    justify-content: start; }
+    #manage > .self > .row > b {
+      width: 5rem;
+      font-size: 1rem; }
+    #manage > .self > .row > span.frz {
+      color: #ff211e; }
+    #manage > .self > .row > span.free {
+      color: #2422ff; }
+    #manage > .self > .row > .udl-ipt > input {
+      font-size: 1rem;
+      padding: 0.4rem 0.2rem; }
+  #manage > .self > button {
+    margin-top: 1rem;
+    padding: 0.3rem 0.8rem;
+    background: #7e1bff;
+    font-size: 1.05rem;
+    color: white;
+    box-shadow: 0 0 0.6rem gray; }
+    #manage > .self > button:hover {
+      background: #7218e6; }
+
+/*# sourceMappingURL=self.css.map */

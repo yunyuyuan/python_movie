@@ -1,0 +1,257 @@
+#container {
+  align-items: flex-start; }
+  #container > .movie {
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem; }
+    #container > .movie > div {
+      background: white;
+      width: calc(100% - 2rem); }
+    #container > .movie span.to_login {
+      color: white;
+      font-size: 1.3rem; }
+      #container > .movie span.to_login > a {
+        background: #4f6eff;
+        padding: 0.4rem 0.8rem;
+        margin: 0 0.6rem;
+        transition: all .15s linear;
+        color: white;
+        border-radius: 0.3rem;
+        text-decoration: none;
+        border: none; }
+        #container > .movie span.to_login > a:hover {
+          background: #4865e9;
+          box-shadow: 0 0 0.5rem white; }
+    #container > .movie > .play {
+      height: 25rem;
+      width: 70rem;
+      margin: 0 auto; }
+      #container > .movie > .play > .mv {
+        height: 100%;
+        width: 70%;
+        flex-shrink: 0; }
+        #container > .movie > .play > .mv > video {
+          height: 100%;
+          width: 100%;
+          outline: none; }
+        #container > .movie > .play > .mv > .login {
+          height: 100%;
+          width: 100%;
+          background: #353535;
+          justify-content: center; }
+      #container > .movie > .play > .detail {
+        flex-direction: column;
+        height: 100%;
+        padding: 0 0.5rem;
+        flex-grow: 1;
+        background: #313335;
+        color: white; }
+        #container > .movie > .play > .detail > img {
+          width: 100%;
+          height: 10rem;
+          margin-top: 0.5rem;
+          object-fit: contain; }
+        #container > .movie > .play > .detail > .title {
+          font-size: 1.1rem;
+          padding: 0.2rem 0;
+          flex-grow: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3; }
+        #container > .movie > .play > .detail > .detail {
+          width: 100%;
+          flex-direction: column;
+          margin: 0.6rem 0; }
+          #container > .movie > .play > .detail > .detail > span {
+            width: 100%;
+            font-size: 0.93rem;
+            display: flex;
+            align-items: center; }
+            #container > .movie > .play > .detail > .detail > span > span {
+              font-size: 1.1em;
+              width: 4rem;
+              flex-shrink: 0;
+              padding: 0.15rem 0.2rem;
+              height: 1.5rem;
+              line-height: 1.5rem;
+              background: #7a00ff;
+              color: white;
+              position: relative;
+              margin: 0.3rem 0; }
+              #container > .movie > .play > .detail > .detail > span > span > span {
+                position: absolute;
+                width: 100%;
+                z-index: 1; }
+              #container > .movie > .play > .detail > .detail > span > span:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -0.75rem;
+                height: 100%;
+                width: 1.5rem;
+                background: inherit;
+                border-radius: 50%;
+                z-index: 0; }
+            #container > .movie > .play > .detail > .detail > span > a {
+              font-size: 1rem;
+              line-height: 1.5rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              margin-left: 1rem; }
+    #container > .movie > .ep, #container > .movie > .ev {
+      max-width: 75rem; }
+    #container > .movie > .ep {
+      padding: 1rem 0;
+      margin: 1rem 0;
+      border: 1px solid gray; }
+      #container > .movie > .ep > span {
+        border: 1px solid #ff4600;
+        padding: 0.3rem 0;
+        flex-shrink: 0;
+        font-size: 0.95rem;
+        color: #ff4600;
+        width: 3.6rem;
+        margin: 0 0.5rem;
+        text-align: center; }
+      #container > .movie > .ep > div {
+        flex-grow: 1;
+        flex-wrap: wrap; }
+        #container > .movie > .ep > div > button {
+          font-size: 1.03rem;
+          background: white;
+          border-color: black;
+          padding: 0.3rem 1.2rem;
+          margin: 0.5rem; }
+          #container > .movie > .ep > div > button.active {
+            background: #4f6eff;
+            color: white; }
+          #container > .movie > .ep > div > button:hover {
+            background: #ff686b;
+            color: white; }
+    #container > .movie > .ev {
+      padding: 1.5rem 0;
+      border: 1px solid gray;
+      flex-direction: column; }
+      #container > .movie > .ev > .dcb {
+        width: 90%;
+        position: relative;
+        padding: 1rem;
+        border: 1px solid #00a835;
+        flex-direction: column;
+        align-items: start; }
+        #container > .movie > .ev > .dcb > b {
+          position: absolute;
+          font-size: 0.93rem;
+          line-height: 1rem;
+          top: -0.5rem;
+          left: 0.5rem;
+          background: white;
+          padding: 0 0.3rem; }
+        #container > .movie > .ev > .dcb > .star-div {
+          width: 100%;
+          padding: 0.8rem 0;
+          border-bottom: 1px dashed #a9a9a9; }
+          #container > .movie > .ev > .dcb > .star-div > b {
+            margin: 0 0.6rem;
+            font-size: 1.8rem;
+            color: #ff7201; }
+          #container > .movie > .ev > .dcb > .star-div > span {
+            font-size: 0.95rem; }
+            #container > .movie > .ev > .dcb > .star-div > span > b {
+              color: #ff514d;
+              font-size: 1.2em;
+              margin: 0 0.3rem; }
+          #container > .movie > .ev > .dcb > .star-div > .cate {
+            margin-left: auto;
+            flex-wrap: wrap; }
+            #container > .movie > .ev > .dcb > .star-div > .cate > a {
+              margin: 0.3rem 0.5rem;
+              border-radius: 0.2rem;
+              text-decoration: none;
+              background: #c6d2ff;
+              transition: all .15s linear;
+              font-size: 0.96rem;
+              padding: 0.3rem 0.8rem;
+              color: black; }
+              #container > .movie > .ev > .dcb > .star-div > .cate > a:hover {
+                background: #b1bce4; }
+        #container > .movie > .ev > .dcb > span {
+          padding: 1rem;
+          font-size: 0.95rem; }
+      #container > .movie > .ev > .body {
+        width: 100%;
+        flex-direction: column; }
+        #container > .movie > .ev > .body > div {
+          width: calc(100% - 2rem);
+          padding: 1rem; }
+        #container > .movie > .ev > .body > .write {
+          justify-content: center; }
+          #container > .movie > .ev > .body > .write > .to_login {
+            color: black; }
+          #container > .movie > .ev > .body > .write > textarea {
+            width: 50%;
+            height: 8rem;
+            font-size: 0.95rem;
+            padding: 0.4rem;
+            font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace; }
+          #container > .movie > .ev > .body > .write > div {
+            width: 20%;
+            flex-direction: column; }
+            #container > .movie > .ev > .body > .write > div > div > b {
+              color: #ff7101;
+              font-size: 1.2rem;
+              width: 3rem;
+              text-align: center; }
+            #container > .movie > .ev > .body > .write > div > button {
+              margin: 1rem 0;
+              background: #4f6eff;
+              color: white;
+              padding: 0.3rem 0.8rem;
+              font-size: 1.08rem;
+              box-shadow: 0 0 0.8rem gray; }
+              #container > .movie > .ev > .body > .write > div > button:hover {
+                background: #455fde; }
+        #container > .movie > .ev > .body > .show {
+          flex-direction: column;
+          border-top: 2px solid #8d8d8d; }
+          #container > .movie > .ev > .body > .show > b {
+            font-size: 1.1rem;
+            padding: 1rem 0; }
+          #container > .movie > .ev > .body > .show > .main {
+            flex-direction: column;
+            border: 1px solid gray;
+            width: 80%; }
+            #container > .movie > .ev > .body > .show > .main > div {
+              width: 100%;
+              flex-direction: column; }
+              #container > .movie > .ev > .body > .show > .main > div > div {
+                background: #ededed;
+                width: calc(100% - 1rem);
+                padding: 0.5rem; }
+                #container > .movie > .ev > .body > .show > .main > div > div > .avatar {
+                  background: #515dff;
+                  border-radius: 50%;
+                  width: 3rem;
+                  height: 3rem;
+                  justify-content: center; }
+                  #container > .movie > .ev > .body > .show > .main > div > div > .avatar > span {
+                    font-size: 1.3rem;
+                    color: white; }
+                #container > .movie > .ev > .body > .show > .main > div > div > span {
+                  margin: 0 0.4rem;
+                  font-size: 1.1rem; }
+                #container > .movie > .ev > .body > .show > .main > div > div > i {
+                  margin-left: auto;
+                  font-size: 0.95rem;
+                  color: #b600e3; }
+              #container > .movie > .ev > .body > .show > .main > div > span {
+                width: 95%;
+                padding: 0.8rem 0;
+                font-size: 0.98rem; }
+
+/*# sourceMappingURL=movie.css.map */

@@ -1,0 +1,89 @@
+#manage > .conf {
+  width: 100%;
+  flex-direction: column; }
+  #manage > .conf > .head {
+    justify-content: center;
+    width: 90%;
+    border-bottom: 1px solid gray;
+    margin: 0.6rem 0;
+    padding: 1rem 0; }
+    #manage > .conf > .head > b {
+      font-size: 1.2rem; }
+  #manage > .conf > .body {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column; }
+    #manage > .conf > .body > .act, #manage > .conf > .body > .pwd {
+      margin: 1rem 0; }
+      #manage > .conf > .body > .act > b, #manage > .conf > .body > .pwd > b {
+        width: 5rem;
+        font-size: 1rem; }
+      #manage > .conf > .body > .act > input, #manage > .conf > .body > .pwd > input {
+        font-size: 1.03rem;
+        padding: 0.4rem;
+        border: 1px solid gray;
+        border-radius: 0.15rem; }
+    #manage > .conf > .body > .swp {
+      width: 100%;
+      flex-direction: column; }
+      #manage > .conf > .body > .swp > b {
+        font-size: 1.05rem;
+        padding: 0.4rem 1.2rem;
+        border-radius: 0.3rem;
+        background: #b2beff; }
+      #manage > .conf > .body > .swp > ul {
+        width: 100%;
+        list-style: none; }
+        #manage > .conf > .body > .swp > ul > li {
+          display: flex;
+          align-items: center;
+          padding: 1rem 0;
+          border-top: 1px solid gray;
+          justify-content: space-around; }
+          #manage > .conf > .body > .swp > ul > li > div:first-of-type {
+            cursor: pointer;
+            width: 20rem;
+            height: 10rem;
+            position: relative; }
+            #manage > .conf > .body > .swp > ul > li > div:first-of-type:hover > b {
+              opacity: 1; }
+            #manage > .conf > .body > .swp > ul > li > div:first-of-type > b, #manage > .conf > .body > .swp > ul > li > div:first-of-type > img {
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+              position: absolute; }
+            #manage > .conf > .body > .swp > ul > li > div:first-of-type > b {
+              font-size: 1.2rem;
+              color: white;
+              opacity: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: rgba(0, 0, 0, 0.5);
+              z-index: 2; }
+            #manage > .conf > .body > .swp > ul > li > div:first-of-type > img {
+              object-fit: contain;
+              background: white;
+              border: 1px solid gray;
+              z-index: 1; }
+            #manage > .conf > .body > .swp > ul > li > div:first-of-type > input {
+              display: none; }
+          #manage > .conf > .body > .swp > ul > li > div:last-of-type > b {
+            margin-right: 0.4rem;
+            font-size: 0.98rem; }
+          #manage > .conf > .body > .swp > ul > li > div:last-of-type > input {
+            padding: 0.4rem 0.2rem;
+            border: 1px solid gray;
+            border-radius: 0.2rem;
+            font-size: 1rem; }
+    #manage > .conf > .body > button {
+      margin: 1rem 0;
+      background: #ff9935;
+      font-size: 1.2rem;
+      color: white;
+      padding: 0.4rem 1.2rem; }
+      #manage > .conf > .body > button:hover {
+        background: #e3882f; }
+
+/*# sourceMappingURL=conf.css.map */

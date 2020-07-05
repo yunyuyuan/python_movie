@@ -1,0 +1,23 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <script src="/static/js/manager.js"></script>
+    <link rel="stylesheet" href="/static/css/manager.css"/>
+    {% block head1 %}
+    {% endblock %}
+{% endblock %}
+{% block content %}
+<div id="manage-menu">
+    <ul>
+    {% for menu in menu_list %}
+        <li>
+            <a :class="{active: '<% menu.url %>'.search(path)!=-1}" href="<% url_for(menu.url) %>"><% menu.name %></a>
+        </li>
+    {% endfor %}
+    </ul>
+    <span @click="logout" title="登出" class="logout"><a></a><span></span></span>
+</div>
+<div id="manage">
+{% block content1 %}
+{% endblock %}
+</div>
+{% endblock %}

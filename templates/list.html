@@ -1,0 +1,29 @@
+{% extends 'plugin/base.html' %}
+{% block head %}
+    <title>主页</title>
+    <script src="/static/js/plugin/vue_turnpage.js"></script>
+    <script src="/static/js/list.js"></script>
+    <link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+    <link rel="stylesheet" href="/static/css/list.css"/>
+{% endblock %}
+
+{% block content %}
+    <div class="list">
+        <div class="head">
+            <span>{{ at }}-<b>{{ s==''?'全部':s }}</b></span>
+            <span>共找到<b>{{ info[0] }}</b>条数据,<b>{{ p_count }}</b>页</span>
+        </div>
+        <div class="body">
+            <div class="main">
+                <a :href="'/movie/'+i[0]" class="-movie" v-for="i in info[1]" :key="i[0]">
+                    <div class="cover">
+                        <img src="/static/img/constant/play.png"/>
+                    </div>
+                    <img :src="'/static/img/cov/'+i[2]"/>
+                    <span>{{ i[1] }}</span>
+                </a>
+            </div>
+            <turn-page @change_p="change_p" :now="now_p" :count="p_count" :show_count="6" :event="change_p"></turn-page>
+        </div>
+    </div>
+{% endblock %}

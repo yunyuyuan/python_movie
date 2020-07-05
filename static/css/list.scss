@@ -1,0 +1,29 @@
+@import "plugin/public";
+#container{
+  align-items: flex-start;
+  >.list{
+    width: 100%;
+    flex-direction: column;
+    >.head{
+      padding: 1rem 0;
+      width: 80%;
+      >span{
+        font-size: 0.98rem;
+        &:last-of-type{
+          margin: 0 1rem 0 auto;
+        }
+        >b{
+          margin: 0 0.5rem;
+          color: red;
+          font-size: 1.2em;
+        }
+      }
+    }
+    >.body{
+      flex-direction: column;
+      >.main{
+        margin: 1rem 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+#manage{
+  >.his{
+    flex-direction: column;
+    width: 100%;
+    >.head{
+      padding: 0.8rem 0;
+      width: 100%;
+      >span{
+        margin-left: 2rem;
+        font-size: 1.05rem;
+        >b{
+          margin: 0 0.3rem;
+          color: #ff333b;
+          font-size: 1.1em;
+        }
+      }
+    }
+    >.list{
+      width: calc(100% - 2rem);
+      padding: 1rem;
+      justify-content: center;
+      >table{
+        max-width: 40rem;
+        width: 100%;
+        >tbody{
+          td{
+            >img{
+              width: 12rem;
+              height: 8rem;
+              object-fit: contain;
+              border: 1px solid #bfbfbf;
+              transition: all .15s linear;
+              background: white;
+              &:hover{
+                transform: scale(1.5);
+              }
+            }
+            >button{
+              background: #d6484c;
+              color: white;
+              &:hover{
+                background: #be4043;
+            }
+            }
+          }
+        }
+      }
+    }
+  }
+}

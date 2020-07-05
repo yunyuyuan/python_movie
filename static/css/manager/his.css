@@ -1,0 +1,36 @@
+#manage > .his {
+  flex-direction: column;
+  width: 100%; }
+  #manage > .his > .head {
+    padding: 0.8rem 0;
+    width: 100%; }
+    #manage > .his > .head > span {
+      margin-left: 2rem;
+      font-size: 1.05rem; }
+      #manage > .his > .head > span > b {
+        margin: 0 0.3rem;
+        color: #ff333b;
+        font-size: 1.1em; }
+  #manage > .his > .list {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    justify-content: center; }
+    #manage > .his > .list > table {
+      max-width: 40rem;
+      width: 100%; }
+      #manage > .his > .list > table > tbody td > img {
+        width: 12rem;
+        height: 8rem;
+        object-fit: contain;
+        border: 1px solid #bfbfbf;
+        transition: all .15s linear;
+        background: white; }
+        #manage > .his > .list > table > tbody td > img:hover {
+          transform: scale(1.5); }
+      #manage > .his > .list > table > tbody td > button {
+        background: #d6484c;
+        color: white; }
+        #manage > .his > .list > table > tbody td > button:hover {
+          background: #be4043; }
+
+/*# sourceMappingURL=his.css.map */

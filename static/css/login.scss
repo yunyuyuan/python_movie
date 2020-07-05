@@ -1,0 +1,76 @@
+@import "plugin/public";
+
+#container{
+  align-items: start;
+  >.login{
+    margin-top: 5rem;
+    width: 25rem;
+    height: 20rem;
+    background: white;
+    box-shadow: 0 0 1rem gray;
+    flex-direction: column;
+    >b{
+      font-size: 1.4rem;
+      padding: 0.5rem 0;
+    }
+    >.main{
+      width: calc(100% - 1rem);
+      padding: 0.5rem;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: space-around;
+      >.who{
+        width: 90%;
+        justify-content: center;
+        >span{
+          font-size: 0.95rem;
+          padding: 0.3rem 0;
+          margin: 0 0.2rem;
+          text-align: center;
+          border-radius: 0.3rem;
+          width: 6rem;
+          cursor: pointer;
+          transition: all .1s linear;
+          &.active{
+            background: #655dff;
+            color: white;
+            box-shadow: 0 0 1rem gray;
+            &:hover{
+              background: #5952e1;
+            }
+          }
+        }
+      }
+      >.udl-ipt{
+        width: 85%;
+        border: 1px solid #ff5a27;
+        margin: 0.8rem;
+        >input{
+          padding: 0.5rem;
+          font-size: 1.08rem;
+        }
+      }
+      >.btm{
+        width: 100%;
+        position: relative;
+        justify-content: center;
+        >button{
+          padding: 0.4rem 1rem;
+          font-size: 1.1rem;
+          background: linear-gradient(to right, #ec22ff, #d431ff);
+          color: white;
+          border: none;
+          box-shadow: 0 0 0.6rem gray;
+          &:hover{
+            transform: scale(1.05);
+            background: linear-gradient(to right, #d431ff, #ec22ff);
+          }
+        }
+        >a{
+          position: absolute;
+          left: calc(50% + 4rem);
+        }
+      }
+    }
+  }
+}

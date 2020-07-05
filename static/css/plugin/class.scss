@@ -1,0 +1,106 @@
+@import "public";
+div.udl-ipt{
+  position: relative;
+  border-radius: 0.2rem;
+  border: 1px solid #d98fff;
+  >input{
+    width: 100%;
+    background: #ebebeb;
+    border-radius: inherit;
+    border: none;
+    &:focus ~ span{
+      left: 0;
+      width: 100%;
+    }
+  }
+  >span{
+    background: black;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transition: all .35s ease-out;
+  }
+}
+.fixed-div{
+  position: fixed;
+  width: 100%;
+  height: calc(100% - #{$head-height});
+  top: $head-height;
+  left: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity .15s linear;
+  opacity: 1;
+  &.fade-enter, &.fade-leave-to{
+    opacity: 0;
+  }
+  >.wrap {
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    >div{
+      border-radius: 0.5rem;
+      background: white;
+      width: 50%;
+      box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.7);
+      @include phone_handle{
+        width: 90% !important;
+      }
+    }
+  }
+}
+.-movie{
+  width: 15rem;
+  height: 15rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid #a8a8a8;
+  transition: all .15s linear;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  text-decoration: none;
+  position: relative;
+  &:hover{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    text-decoration: underline;
+    color: red;
+    >.cover{
+      opacity: 1;
+      >img{
+        transform: scale(1.3);
+      }
+    }
+  }
+  >.cover{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    transition: all .15s linear;
+    opacity: 0;
+    justify-content: center;
+    cursor: pointer;
+    >img{
+      width: 3rem;
+      height: 3rem;
+      transition: all .15s linear;
+    }
+  }
+  >img{
+    width: 100%;
+    height: calc(100% - 3rem);
+    object-fit: contain;
+    border: 1px solid #989898;
+  }
+  >span{
+    font-size: 1rem;
+    line-height: 1rem;
+    margin: auto 0;
+    @include text-overflow(2);
+  }
+}

@@ -1,0 +1,75 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-浏览历史</title>
+<script src="/static/js/plugin/vue_turnpage.js"></script>
+<link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+<link rel="stylesheet" href="/static/css/manager/his.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="his">
+    <div class="head">
+        <span>共<b>{{ h_count }}</b>条浏览历史,<b>{{ p_count }}</b>页</span>
+    </div>
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <td>封面</td>
+                    <td>标题</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in his_list" :key="item[0]">
+                    <td><img :src="'/static/img/cov/'+item[2]"/></td>
+                    <td>{{ item[1] }}</td>
+                    <td>
+                        <button @click="del(item[0])">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <turn-page @change_p="change_p" :now="now_p" :count="p_count" :show_count="6" :event="'change_p'"></turn-page>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let page_count = 15;
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                his_list: [],
+                now_p: 1,
+                h_count: 0,
+            },
+            computed: {
+                p_count: function () {
+                    return Math.ceil(this.h_count/page_count)
+                }
+            },
+            methods: {
+                change_p: function (p){
+                    vue_.now_p = p;
+                    get_list()
+                },
+                del: function (id) {
+                    ajax_(function (r) {
+                        if (r['state']==='success'){
+                            head_vue.remind(r);
+                            get_list()
+                        }
+                    }, '/user/del_his', {'id': id})
+                },
+            }
+        });
+        get_list();
+        function get_list() {
+            ajax_(function (r) {
+                if (r['state']==='success'){
+                    [vue_.h_count, vue_.his_list] = r['data']
+                }
+            }, '/user/get_his', { 'p': vue_.now_p-1, 'count': page_count})
+        }
+    })
+</script>
+{% endblock %}

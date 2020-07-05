@@ -1,0 +1,93 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-用户</title>
+<script src="/static/js/plugin/vue_turnpage.js"></script>
+<link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+<link rel="stylesheet" href="/static/css/manager/manager.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="manager">
+    <div class="head">
+        <span>共<b>{{ u_count }}</b>位用户,<b>{{ p_count }}</b>页</span>
+    </div>
+    <div class="list">
+        <table>
+            <thead>
+                <tr>
+                    <td>id</td>
+                    <td>名称</td>
+                    <td>账号</td>
+                    <td>状态</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in user_list" :key="item['id']">
+                    <td>{{ item['id'] }}</td>
+                    <td>{{ item['nm'] }}</td>
+                    <td>{{ item['act'] }}</td>
+                    <td :class="item['frz']?'frz':'free'">{{ item['frz']?'已冻结':'正常' }}</td>
+                    <td>
+                        <button @click="do_frz(item['id'],item['frz'])" :class="item['frz']?'free':'frz'">{{ item['frz']?'解冻':'冻结' }}</button>
+                        <button @click="del(item['id'])" class="del">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <turn-page @change_p="change_p" :now="now_p" :count="p_count" :show_count="8" :event="'change_p'"></turn-page>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let page_count = 10;
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                user_list: [],
+                now_p: 1,
+                u_count: 0,
+            },
+            computed: {
+                p_count: function () {
+                    return Math.ceil(this.u_count/page_count)
+                }
+            },
+            methods: {
+                change_p: function (p){
+                    vue_.now_p = p;
+                    get_list()
+                },
+                do_frz: function (id, f) {
+                    ajax_(function (r) {
+                        if (r['state']==='success'){
+                            r['msg'] = (f?'解冻':'冻结')+'成功';
+                            head_vue.remind(r);
+                            get_list()
+                        }
+                    }, '/manager/frz', {'id': id, 'f': !f})
+                },
+                del: function (id) {
+                    if (confirm('确认删除该用户?')){
+                        ajax_(function (r) {
+                            if (r['state']==='success'){
+                                head_vue.remind(r);
+                                get_list()
+                            }
+                        }, '/manager/del', {'id': id})
+                    }
+                },
+            }
+        });
+        get_list();
+        function get_list() {
+            ajax_(function (r) {
+                if (r['state']==='success'){
+                    [vue_.u_count, vue_.user_list] = r['data']
+                }else{
+                    head_vue.remind(r)
+                }
+            }, '/manager/get_list', {'p': vue_.now_p-1, 'count': page_count})
+        }
+    })
+</script>
+{% endblock %}

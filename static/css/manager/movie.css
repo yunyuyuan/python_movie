@@ -1,0 +1,192 @@
+@charset "UTF-8";
+#manage > .movie {
+  flex-direction: column;
+  width: 100%; }
+  #manage > .movie > .head {
+    padding: 0.8rem 0;
+    width: 100%; }
+    #manage > .movie > .head > span {
+      margin-left: 2rem;
+      font-size: 1.05rem; }
+      #manage > .movie > .head > span > b {
+        margin: 0 0.3rem;
+        color: #ff333b;
+        font-size: 1.1em; }
+    #manage > .movie > .head > button {
+      margin: 0 2rem 0 auto;
+      background: #4f6eff;
+      color: white;
+      font-size: 1.04rem;
+      padding: 0.3rem 0.8rem;
+      box-shadow: 0 0 0.5rem #9e9e9e; }
+      #manage > .movie > .head > button:hover {
+        background: #4661e2; }
+  #manage > .movie > .add .main {
+    flex-direction: column;
+    width: 60rem; }
+    #manage > .movie > .add .main > b {
+      font-size: 1.1rem;
+      padding: 1rem; }
+    #manage > .movie > .add .main > .cover, #manage > .movie > .add .main > .movie {
+      justify-content: center;
+      border-radius: 0.4rem;
+      cursor: pointer; }
+    #manage > .movie > .add .main > .cover {
+      height: 6rem;
+      width: 10rem;
+      border: 1px dashed black;
+      margin-bottom: 0.5rem; }
+      #manage > .movie > .add .main > .cover > input {
+        display: none; }
+      #manage > .movie > .add .main > .cover > img {
+        border-radius: inherit;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border: 1px solid gray; }
+    #manage > .movie > .add .main > .movie {
+      width: 60%; }
+      #manage > .movie > .add .main > .movie > .cos {
+        width: 8rem;
+        height: 2rem;
+        border: 1px solid #494949;
+        justify-content: center; }
+        #manage > .movie > .add .main > .movie > .cos > input {
+          display: none; }
+      #manage > .movie > .add .main > .movie > button {
+        border: 1px solid #ff6f00;
+        background: white;
+        margin-left: 0.6rem; }
+        #manage > .movie > .add .main > .movie > button:hover {
+          color: red; }
+    #manage > .movie > .add .main > .title {
+      width: 90%;
+      justify-content: center;
+      border-bottom: 1px solid gray; }
+      #manage > .movie > .add .main > .title > b {
+        font-size: 1.02rem;
+        margin: 0 0.3rem; }
+      #manage > .movie > .add .main > .title > .udl-ipt {
+        width: 25rem;
+        margin: 0.3rem 0; }
+        #manage > .movie > .add .main > .title > .udl-ipt > input {
+          padding: 0.6rem 0.4rem;
+          font-size: 1.06rem; }
+    #manage > .movie > .add .main > .row {
+      width: 95%; }
+      #manage > .movie > .add .main > .row > b {
+        width: 3.6rem;
+        font-size: 0.98rem;
+        text-align: center; }
+    #manage > .movie > .add .main > .cate {
+      margin: 0.8rem 0;
+      width: 95%; }
+      #manage > .movie > .add .main > .cate > span {
+        cursor: pointer;
+        margin: 0.2rem 0.4rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.95rem;
+        background: #c6d2ff;
+        position: relative;
+        overflow: hidden; }
+        #manage > .movie > .add .main > .cate > span:after {
+          content: '删除';
+          position: absolute;
+          left: 0;
+          font-size: 0.95rem;
+          padding: 0.3rem 0.6rem;
+          top: 100%;
+          background: red;
+          color: white;
+          width: calc(100% - 1.2rem);
+          text-align: center;
+          transition: all .15s linear; }
+        #manage > .movie > .add .main > .cate > span:hover:after {
+          top: 0; }
+      #manage > .movie > .add .main > .cate > a {
+        cursor: pointer;
+        color: #415bff;
+        transition: all .15s linear; }
+        #manage > .movie > .add .main > .cate > a:before {
+          font-family: var(--ico-font);
+          content: var(--ico-add);
+          font-size: 1.8rem;
+          line-height: 1.8rem; }
+        #manage > .movie > .add .main > .cate > a:hover {
+          color: #374dd9; }
+    #manage > .movie > .add .main > .detail {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 0.8rem; }
+      #manage > .movie > .add .main > .detail > .info-detail {
+        width: 12rem; }
+        #manage > .movie > .add .main > .detail > .info-detail > span {
+          font-size: 0.9rem;
+          width: 2rem;
+          flex-shrink: 0; }
+        #manage > .movie > .add .main > .detail > .info-detail > .udl-ipt {
+          margin: 0.3rem 0; }
+          #manage > .movie > .add .main > .detail > .info-detail > .udl-ipt > input {
+            padding: 0.4rem 0;
+            font-size: 1rem; }
+    #manage > .movie > .add .main > .txt > textarea {
+      width: 80%;
+      height: 5rem;
+      font-size: 0.98rem;
+      padding: 0.4rem 0.2rem; }
+    #manage > .movie > .add .main > button {
+      margin: 1rem 0 1rem 0;
+      background: #ff7201;
+      font-size: 1.1rem;
+      color: white;
+      box-shadow: 0 0 0.8rem #9a9a9a; }
+      #manage > .movie > .add .main > button:hover {
+        background: #e36501; }
+    #manage > .movie > .add .main > .upload {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 1.8rem;
+      justify-content: center;
+      margin-bottom: 0.5rem; }
+      #manage > .movie > .add .main > .upload > div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: -100%;
+        top: 0;
+        background: linear-gradient(to right, #8c3bff, #6645ff);
+        border-radius: 0.5rem;
+        z-index: 1; }
+      #manage > .movie > .add .main > .upload > span {
+        z-index: 2;
+        font-size: 0.95rem; }
+  #manage > .movie > .list {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    justify-content: center; }
+    #manage > .movie > .list > table {
+      max-width: 60rem;
+      width: 100%; }
+      #manage > .movie > .list > table > tbody td > a > img {
+        width: 8rem;
+        height: 6rem;
+        object-fit: contain;
+        border: 1px solid gray;
+        background: white;
+        transition: all .1s linear; }
+        #manage > .movie > .list > table > tbody td > a > img:hover {
+          transform: scale(1.5); }
+      #manage > .movie > .list > table > tbody td > button {
+        margin: 0 0.2rem;
+        color: white; }
+        #manage > .movie > .list > table > tbody td > button.alter {
+          background: #4840ff; }
+          #manage > .movie > .list > table > tbody td > button.alter:hover {
+            background: #4039e3; }
+        #manage > .movie > .list > table > tbody td > button.del {
+          background: #d6484c; }
+          #manage > .movie > .list > table > tbody td > button.del:hover {
+            background: #be4043; }
+
+/*# sourceMappingURL=movie.css.map */

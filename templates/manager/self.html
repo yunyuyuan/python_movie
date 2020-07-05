@@ -1,0 +1,63 @@
+{% extends 'manager/base.html' %}
+{% block head1 %}
+<title>管理-个人信息</title>
+<script src="/static/js/plugin/vue_turnpage.js"></script>
+<script src="/static/js/lib/md5.js"></script>
+<link rel="stylesheet" href="/static/css/plugin/vue_turnpage.css"/>
+<link rel="stylesheet" href="/static/css/manager/self.css"/>
+{% endblock %}
+{% block content1 %}
+<div class="self">
+    <b>个人信息</b>
+    <div class="row">
+        <b>ID</b>
+        <span>{{ my_id }}</span>
+    </div>
+    <div class="row">
+        <b>状态</b>
+        <span :class="frz?'frz':'free'">{{ frz?'已冻结':'正常' }}</span>
+    </div>
+    <div class="row">
+        <b>昵称</b>
+        <div class="udl-ipt">
+            <input v-model="nm" maxlength="32">
+            <span></span>
+        </div>
+    </div>
+    <div class="row">
+        <b>密码</b>
+        <div class="udl-ipt">
+            <input v-model="pwd" maxlength="32" placeholder="修改">
+            <span></span>
+        </div>
+    </div>
+    <button @click="save">保存</button>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let vue_ = new Vue({
+            el: '#manage',
+            data: {
+                my_id: '<% self_info.id %>',
+                frz: '<% self_info.frz %>'==='true',
+                act: '<% self_info.act %>',
+                nm: '<% self_info.nm %>',
+                pwd: '',
+            },
+            methods: {
+                save: function (e) {
+                    let btn = $(e.target);
+                    btn.attr('disabled', '');
+                    ajax_(function (r) {
+                        head_vue.remind(r)
+                    }, '/user/alter_info', {'nm': vue_.nm, 'pwd': (vue_.pwd==='')?'':hex_md5(vue_.pwd)}, {
+                        complete: function () {
+                            btn.removeAttr('disabled');
+                        }
+                    })
+                }
+            }
+        });
+    })
+</script>
+{% endblock %}

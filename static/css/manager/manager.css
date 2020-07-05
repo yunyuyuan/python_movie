@@ -1,0 +1,70 @@
+#manage > .manager {
+  flex-direction: column;
+  width: 100%; }
+  #manage > .manager > .head {
+    padding: 0.8rem 0;
+    width: 100%; }
+    #manage > .manager > .head > span {
+      margin-left: 2rem;
+      font-size: 1.05rem; }
+      #manage > .manager > .head > span > b {
+        margin: 0 0.3rem;
+        color: #ff333b;
+        font-size: 1.1em; }
+    #manage > .manager > .head > button {
+      margin: 0 2rem 0 auto;
+      background: #4f6eff;
+      color: white;
+      font-size: 1.04rem;
+      padding: 0.3rem 0.8rem;
+      box-shadow: 0 0 0.5rem #9e9e9e; }
+      #manage > .manager > .head > button:hover {
+        background: #4661e2; }
+  #manage > .manager > .add .main {
+    flex-direction: column;
+    width: 30rem; }
+    #manage > .manager > .add .main > b {
+      font-size: 1.1rem;
+      padding: 1rem; }
+    #manage > .manager > .add .main > .udl-ipt {
+      margin: 1rem 0;
+      width: 50%; }
+      #manage > .manager > .add .main > .udl-ipt > input {
+        padding: 0.7rem 0.4rem;
+        font-size: 1.06rem; }
+    #manage > .manager > .add .main > button {
+      margin: 3rem 0 1rem 0;
+      background: #ff7201;
+      font-size: 1.1rem;
+      color: white;
+      box-shadow: 0 0 0.8rem #9a9a9a; }
+      #manage > .manager > .add .main > button:hover {
+        background: #e36501; }
+  #manage > .manager > .list {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    justify-content: center; }
+    #manage > .manager > .list > table {
+      max-width: 60rem;
+      width: 100%; }
+      #manage > .manager > .list > table > tbody td.frz {
+        color: #d63b3c; }
+      #manage > .manager > .list > table > tbody td.free {
+        color: #0020ff; }
+      #manage > .manager > .list > table > tbody td > button {
+        margin: 0 0.2rem;
+        color: white; }
+        #manage > .manager > .list > table > tbody td > button.frz {
+          background: #4840ff; }
+          #manage > .manager > .list > table > tbody td > button.frz:hover {
+            background: #4039e3; }
+        #manage > .manager > .list > table > tbody td > button.free {
+          background: #0cc600; }
+          #manage > .manager > .list > table > tbody td > button.free:hover {
+            background: #0bae00; }
+        #manage > .manager > .list > table > tbody td > button.del {
+          background: #d6484c; }
+          #manage > .manager > .list > table > tbody td > button.del:hover {
+            background: #be4043; }
+
+/*# sourceMappingURL=manager.css.map */

@@ -1,0 +1,59 @@
+#manage-menu {
+  position: fixed;
+  width: 10rem;
+  height: calc(100% - 3.6rem);
+  left: 0;
+  top: 3.6rem;
+  background: #2b2b2b;
+  flex-direction: column; }
+  #manage-menu > ul {
+    width: 100%;
+    margin: 1rem 0 auto 0;
+    list-style: none; }
+    #manage-menu > ul > li {
+      display: flex; }
+      #manage-menu > ul > li > a {
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+        font-size: 1.1rem;
+        color: white;
+        padding: 1rem 0; }
+        #manage-menu > ul > li > a:hover {
+          background: #3e3e3e; }
+        #manage-menu > ul > li > a.active {
+          background: #111111; }
+  #manage-menu > .logout {
+    margin: auto 0 1rem 0;
+    cursor: pointer;
+    position: relative;
+    width: 2rem;
+    height: 2rem; }
+    #manage-menu > .logout:hover > span {
+      color: #e32c2d; }
+    #manage-menu > .logout > a {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      top: 25%;
+      left: 25%;
+      background: white;
+      z-index: 1; }
+    #manage-menu > .logout > span {
+      position: absolute;
+      z-index: 2;
+      color: #ff3133; }
+      #manage-menu > .logout > span:before {
+        font-family: var(--ico-font);
+        content: var(--ico-logout);
+        font-size: 2rem;
+        line-height: 2rem; }
+
+#manage {
+  position: absolute;
+  left: 10rem;
+  width: calc(100% - 10rem);
+  flex-direction: column;
+  top: 1rem; }
+
+/*# sourceMappingURL=manager.css.map */
